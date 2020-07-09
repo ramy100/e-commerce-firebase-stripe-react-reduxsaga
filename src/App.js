@@ -29,7 +29,8 @@ function App() {
     };
   }, []);
   useEffect(() => {
-    console.log(`Current User Changed to => ${currentUser}`);
+    console.log("Current User is ");
+    console.log(currentUser);
   }, [currentUser]);
 
   return (
