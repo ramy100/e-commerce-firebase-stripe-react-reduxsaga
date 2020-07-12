@@ -9,7 +9,7 @@ import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 function CheckoutPage({ cartItems, cartTotal }) {
   const cartItemsElements = cartItems.map((item) => (
-    <CheckOutItem item={item} />
+    <CheckOutItem key={item.id} item={item} />
   ));
   return (
     <div className="checkout-page">
