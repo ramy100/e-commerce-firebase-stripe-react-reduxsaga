@@ -1,5 +1,6 @@
 import React from "react";
 import "./checkout.styles.scss";
+import StripeButton from "../../components/stripe-button/stripe-button.component";
 import {
   selectCartItems,
   SelectCartTotal,
@@ -32,6 +33,12 @@ function CheckoutPage({ cartItems, cartTotal }) {
       </div>
       {cartItemsElements}
       <div className="total">Total : {cartTotal}$</div>
+      <div className="test-warning">
+        *Please use the follwing test credit card for payments*
+        <br />
+        4242 4242 4242 4242 - EXP : any future date - CVV : any 3 numbers
+      </div>
+      <StripeButton price={cartTotal} />
     </div>
   );
 }
