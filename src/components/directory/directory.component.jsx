@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./directory.styles.scss";
 import "../menu-item/menu-item.component";
 import MenuItem from "../menu-item/menu-item.component";

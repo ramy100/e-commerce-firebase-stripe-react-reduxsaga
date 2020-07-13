@@ -8,8 +8,7 @@ import {
 } from "../../redux/cart/cart.actions";
 
 function CheckoutItem({ item, dispatch, removeItem, addItem, decreaseItem }) {
-  const { id, name, imageUrl, price, quantity } = item;
-  console.log(item);
+  const { name, imageUrl, price, quantity } = item;
   return (
     <div className="checkout-item">
       <div className="image-container">

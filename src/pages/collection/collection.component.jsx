@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import CollectionItem from "../../components/collection-item/collection-item.component";
 
 function CollectionPage({ collection }) {
-  const { items, title } = collection;
+  const { items } = collection;
   const itemsElements = items.map((item) => (
     <CollectionItem key={item.id} item={item} />
   ));
