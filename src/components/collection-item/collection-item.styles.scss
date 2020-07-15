@@ -10,7 +10,7 @@
     .image {
       opacity: 0.8;
     }
-    .custom-button {
+    button {
       display: flex;
       opacity: 0.85;
     }
@@ -40,7 +40,7 @@
       width: 10%;
     }
   }
-  .custom-button {
+  button {
     width: 80%;
     position: absolute;
     opacity: 0.7;
