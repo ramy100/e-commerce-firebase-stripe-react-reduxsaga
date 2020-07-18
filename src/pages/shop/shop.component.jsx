@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { Route } from "react-router-dom";
-import { fetchCollectionsAsync } from "../../redux/shop/shop.actions";
+import { fetchCallStart } from "../../redux/shop/shop.actions";
 
 import { connect } from "react-redux";
 import CollectionsOverviewContainer from "../../components/collection-overview/collection-overview.container";
@@ -27,7 +27,7 @@ function Shop({ match, getCollections }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getCollections: () => dispatch(fetchCollectionsAsync()),
+  getCollections: () => dispatch(fetchCallStart()),
 });
 
 export default connect(null, mapDispatchToProps)(Shop);
