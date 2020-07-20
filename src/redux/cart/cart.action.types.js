@@ -3,5 +3,6 @@ const CartActions = {
   ADD_ITEM: "ADD_ITEM",
   REMOVE_ITEM: "REMOVE_ITEM",
   DECREASE_QUANTITY: "DECREASE_QUANTITY",
+  CLEAR_CART: "CLEAR_CART",
 };
 export default CartActions;
