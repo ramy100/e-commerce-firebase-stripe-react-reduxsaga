@@ -3,7 +3,9 @@ import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 import "./sign-up.styles.scss";
-function SignUp() {
+import { signUpStart } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
+function SignUp({ signUpStart }) {
   const initialState = {
     displayName: "",
     email: "",
@@ -22,12 +24,7 @@ function SignUp() {
       return;
     }
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-      setFormData(initialState);
+      await signUpStart({ email, password }, { displayName });
     } catch (error) {
       console.error(error);
     }
@@ -78,4 +75,9 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  signUpStart: (emainAndPassword, additionalData) =>
+    dispatch(signUpStart(emainAndPassword, additionalData)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

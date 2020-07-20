@@ -11,11 +11,13 @@ import {
   signInFailuer,
   signOutFailuer,
   signOutSuccess,
+  signUpFaliuer,
+  signUpSuccess,
 } from "./user.actions";
 
-function* getSnapShop(user) {
+function* getSnapShop(user, additionAdata) {
   try {
-    const userRef = yield call(createUserProfileDocument, user);
+    const userRef = yield call(createUserProfileDocument, user, additionAdata);
     const userSnapShot = yield userRef.get();
     yield put(signInSuccess({ id: userSnapShot.id, ...userSnapShot.data() }));
   } catch (error) {
@@ -60,6 +62,28 @@ function* signOutUserAsync() {
   }
 }
 
+function* signUpUserAsync({
+  payload: {
+    emailAndPassword: { email, password },
+    additionalData,
+  },
+}) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield put(signUpSuccess(user, additionalData));
+  } catch (error) {
+    yield put(signUpFaliuer(error.message));
+  }
+}
+
+function* signUpUserSuccessAsync({ payload: { user, additionalData } }) {
+  try {
+    yield getSnapShop(user, additionalData);
+  } catch (error) {
+    yield put(signUpFaliuer(error.message));
+  }
+}
+
 function* onGoogleSignInStart() {
   yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, GoogleSignInAsync);
 }
@@ -76,11 +100,20 @@ function* onSignOutStart() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOutUserAsync);
 }
 
+function* onSignUpStart() {
+  yield takeLatest(UserActionTypes.SIGN_UP_START, signUpUserAsync);
+}
+function* onSignUpSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signUpUserSuccessAsync);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onCheckUserSession),
     call(onSignOutStart),
+    call(onSignUpStart),
+    call(onSignUpSuccess),
   ]);
 }
