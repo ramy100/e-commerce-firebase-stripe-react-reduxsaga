@@ -15,7 +15,7 @@ import { checkUserSession } from "./redux/user/user.actions";
 function App({ currentUser, checkUserSession }) {
   useEffect(() => {
     checkUserSession();
-  }, []);
+  }, [checkUserSession]);
   return (
     <div>
       <Header />

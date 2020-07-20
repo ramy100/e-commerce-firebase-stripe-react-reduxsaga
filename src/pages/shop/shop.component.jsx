@@ -10,7 +10,7 @@ import CollectionContainer from "../collection/collection.container";
 function Shop({ match, getCollections }) {
   useEffect(() => {
     getCollections();
-  }, []);
+  }, [getCollections]);
   return (
     <div className="shop-page">
       <Route

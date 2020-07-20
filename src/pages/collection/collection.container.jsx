@@ -1,4 +1,3 @@
-import React from "react";
 import { createStructuredSelector } from "reselect";
 import { selectIsCollectionsLoaded } from "../../redux/shop/shop.selectors";
 import { compose } from "redux";
