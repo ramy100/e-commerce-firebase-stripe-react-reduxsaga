@@ -4,6 +4,7 @@ import FormInput from "../form-input/form-input.component";
 import "./sign-up.styles.scss";
 import { signUpStart } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
+import swal from "sweetalert";
 function SignUp({ signUpStart }) {
   const initialState = {
     displayName: "",
@@ -19,7 +20,11 @@ function SignUp({ signUpStart }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      alert("passwords dont match");
+      swal(
+        "Incomplete Sign Up",
+        "Password confirmation doesn't match!",
+        "error"
+      );
       return;
     }
     try {

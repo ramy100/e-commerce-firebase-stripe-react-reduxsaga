@@ -1,6 +1,7 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import swal from "sweetalert";
 function StripeButton({ price }) {
   const priceInCents = price * 100;
   const PublishableKey =
@@ -15,11 +16,15 @@ function StripeButton({ price }) {
       },
     })
       .then((response) => {
-        alert("Payment Successfull");
+        swal("Paymen Recieved", "Thanks for shopping!", "success");
       })
       .catch((error) => {
         console.log("payment error");
-        alert("Payment Issue");
+        swal(
+          "Paymen Rejected",
+          "There was an error recieving payments!",
+          "error"
+        );
       });
   };
   return (

@@ -5,14 +5,16 @@ import {
   selectCartItems,
   SelectCartTotal,
 } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { Redirect } from "react-router-dom";
 import CheckOutItem from "../../components/checkout-item/checkout-item.component";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-function CheckoutPage({ cartItems, cartTotal }) {
+function CheckoutPage({ cartItems, cartTotal, currentUser }) {
   const cartItemsElements = cartItems.map((item) => (
     <CheckOutItem key={item.id} item={item} />
   ));
-  return (
+  return currentUser ? (
     <div className="checkout-page">
       <div className="checkout-header">
         <div className="header-block">
@@ -40,12 +42,15 @@ function CheckoutPage({ cartItems, cartTotal }) {
       </div>
       <StripeButton price={cartTotal} />
     </div>
+  ) : (
+    <Redirect to="/signin" />
   );
 }
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
   cartTotal: SelectCartTotal,
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);
